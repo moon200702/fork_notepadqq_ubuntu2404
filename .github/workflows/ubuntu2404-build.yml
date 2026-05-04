@@ -1,0 +1,51 @@
+name: ubuntu2404-qt5-build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            git \
+            pkg-config \
+            qtbase5-dev \
+            qttools5-dev \
+            qttools5-dev-tools \
+            qtwebengine5-dev \
+            libqt5websockets5-dev \
+            libqt5svg5-dev \
+            libuchardet-dev \
+            qml-module-qtquick-controls \
+            qml-module-qtquick-controls2 \
+            qml-module-qtwebengine \
+            qml-module-qtwebchannel \
+            qml-module-qtquick-dialogs \
+            qml-module-qt-labs-settings \
+            qml-module-qt-labs-folderlistmodel
+
+      - name: Configure
+        run: ./configure --prefix /usr 2>&1 | tee configure.log
+
+      - name: Build
+        run: make -j2 2>&1 | tee build.log
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ubuntu2404-build-logs
+          path: |
+            configure.log
+            build.log
