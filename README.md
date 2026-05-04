@@ -7,6 +7,21 @@
 > 
 >  -- Daniele
 
+
+## Fork status (Ubuntu 24.04 / Qt 5.15.x)
+
+This fork focuses on **Ubuntu 24.04 + Qt 5.15.x compatibility** with priorities in this order:
+
+1. Data correctness
+2. Runtime stability
+3. Reproducible builds
+
+Current status: **porting in progress**.
+
+- Baseline build verification and CI are being added for Ubuntu 24.04.
+- Qt version must be explicitly checked in each environment (`qmake -v`, `pkg-config --modversion Qt5Core`).
+- This fork is **not declared production-ready** yet; please validate with the smoke-test checklist before critical use.
+
 ### Links
 
 * [What is it?](#what-is-it)
