@@ -1,146 +1,512 @@
+可以，這版我重新整理成**可直接整份貼到 README.md** 的完整 Markdown。
+重點放在：個人 fork、非官方、Codex/AI 協助、保留 upstream attribution、Ubuntu 24.04 / Qt 5.15.x compatibility、目前 experimental、不誇大穩定性。
+
+````markdown
 # Notepadqq Ubuntu 24.04 Compatibility Fork
 
-> This repository is an unofficial fork of [notepadqq/notepadqq](https://github.com/notepadqq/notepadqq).
->
-> The goal of this fork is to test and improve compatibility with Ubuntu 24.04 and Qt 5.15.x.
->
-> This project is not affiliated with, endorsed by, or maintained by the original Notepadqq maintainers.
+> Unofficial personal fork of [notepadqq/notepadqq](https://github.com/notepadqq/notepadqq).
+
+This repository is a personal compatibility fork of Notepadqq.
+
+The purpose of this fork is to experiment with rebuilding, testing, and adapting Notepadqq for:
+
+- Ubuntu 24.04
+- Qt 5.15.x
+- Notepad++ / Notepadqq-like basic editing experience
+- safer validation for infrastructure-oriented text editing workflows
+
+This fork is **not** an official Notepadqq release.
+
+This fork is **not affiliated with, endorsed by, or maintained by the original Notepadqq maintainers**.
+
+The original Notepadqq project is no longer actively maintained, and newer OS / Qt versions may have compatibility or runtime stability issues. This fork keeps that context visible and treats compatibility, runtime stability, and data correctness as active testing areas.
+
+---
 
 ## Fork status
 
-This fork is currently experimental.
+This fork is currently **experimental**.
+
+| Area | Status |
+|---|---|
+| Ubuntu 24.04 build | Testing |
+| Qt 5.15.x compatibility | Testing |
+| Runtime smoke test | In progress |
+| Data-correctness test | In progress |
+| Production readiness | Not ready |
+| Release package | Not provided |
+
+Recommended use:
+
+- Testing
+- Local experimentation
+- Compatibility investigation
+- Notepadqq migration research
+- Learning and reviewing AI-assisted code changes
+
+Not recommended yet:
+
+- Editing critical infrastructure files as the only editor
+- Editing important files without backup
+- Large-scale search and replace on important files
+- Production use
+- Claiming this fork is stable
+
+---
+
+## Why this fork exists
+
+Notepadqq provides a familiar Notepad++-like editing experience on Linux, but the upstream project is no longer actively maintained.
+
+This fork exists to explore whether Notepadqq can be made usable again on a modern Ubuntu desktop environment, especially Ubuntu 24.04 with Qt 5.15.x.
+
+The goal is not to redesign Notepadqq into a new IDE.
+
+The goal is to preserve the original lightweight editor experience while making the build, runtime behavior, and basic file-editing correctness easier to verify.
+
+---
+
+## AI-assisted development notice
+
+This fork is maintained as a personal learning and compatibility experiment.
+
+Some changes in this fork may be created or assisted with AI coding tools, including OpenAI Codex.
+
+AI-assisted changes should still follow normal open-source expectations:
+
+- Changes should be reviewed before merging.
+- Build and runtime behavior should be tested.
+- Data-correctness risks should be documented.
+- Generated code should not remove existing license notices.
+- Generated code should not introduce unclear ownership or licensing problems.
+- Changes should remain small, auditable, and explainable.
+
+AI assistance does not replace human review.
+
+---
+
+## Project priorities
+
+This fork prioritizes:
+
+1. **Data correctness**
+2. **Runtime stability**
+3. **Reproducible builds**
+4. **Minimal behavior changes**
+5. **Preserving Notepadqq / Notepad++-like user experience**
+
+For infrastructure-oriented text editing, the most important risks are not visual design issues. The important risks are:
+
+- Save failure
+- Silent overwrite
+- External file changes being ignored
+- Line ending changes
+- Encoding changes
+- Unicode whitespace changes
+- Broken search and replace
+- Crash during editing
+- UI showing a save as successful when it actually failed
+
+This fork should not be considered reliable for important files until these areas are tested.
+
+---
+
+## Goals
 
 Current goals:
 
 - Build Notepadqq on Ubuntu 24.04
-- Test runtime behavior with Qt 5.15.x
-- Preserve Notepadqq / Notepad++-like user experience
-- Improve documentation for build and smoke testing
-- Investigate crash and data-correctness risks
+- Verify the actual Qt 5 version used by the build environment
+- Preserve existing Notepadqq behavior where possible
+- Keep Notepad++-like default shortcuts and editing workflow
+- Improve Ubuntu 24.04 build documentation
+- Add reproducible build notes
+- Add smoke-test procedures
+- Investigate runtime crash risks
+- Investigate data-correctness risks
 
-This fork should not yet be considered production-ready.
-Use it at your own risk, especially for important files or infrastructure configuration.
+---
 
+## Non-goals
 
-# <img src="https://user-images.githubusercontent.com/4319621/36906314-e3f99680-1e35-11e8-90fd-f959c9641f36.png" alt="Notepadqq" width="32" height="32" /> Notepadqq [![Build Status](https://travis-ci.com/notepadqq/notepadqq.svg?branch=master)](https://travis-ci.com/notepadqq/notepadqq) [![notepadqq](https://snapcraft.io/notepadqq/badge.svg)](https://snapcraft.io/notepadqq)
+This fork does not currently aim to:
 
-> [!WARNING]  
-> This project is not actively maintained anymore. New maintainers are welcome.
->
-> It has been reported that with the most recent OS/Qt versions, the program can crash unexpectedly. Use this at your own risk.
-> 
->  -- Daniele
+- Become the official Notepadqq project
+- Replace the upstream Notepadqq maintainers
+- Redesign the editor UI
+- Migrate to Qt 6 in the first phase
+- Become a full IDE
+- Add a plugin ecosystem
+- Claim production stability before testing evidence exists
 
+---
 
-## Fork status (Ubuntu 24.04 / Qt 5.15.x)
+## Relationship to upstream
 
-This fork focuses on **Ubuntu 24.04 + Qt 5.15.x compatibility** with priorities in this order:
+Upstream project:
 
-1. Data correctness
-2. Runtime stability
-3. Reproducible builds
+- <https://github.com/notepadqq/notepadqq>
 
-Current status: **porting in progress**.
+This fork preserves the original project history, license, and attribution.
 
-- Baseline build verification and CI are being added for Ubuntu 24.04.
-- Qt version must be explicitly checked in each environment (`qmake -v`, `pkg-config --modversion Qt5Core`).
-- This fork is **not declared production-ready** yet; please validate with the smoke-test checklist before critical use.
+The upstream project remains the original source of Notepadqq. This repository is only a personal compatibility fork focused on Ubuntu 24.04 / Qt 5.15.x testing.
 
-### Links
+---
 
-* [What is it?](#what-is-it)
-* [Build it yourself](#build-it-yourself)
-* [Download it](#distribution-packages)
+## License
 
-#### What is it?
+This project is a fork of Notepadqq and remains licensed under the GNU General Public License v3.0.
 
-Notepadqq is a text editor designed by developers, for developers. 
+Original project:
 
-![screenshot_20180302_163505](https://notepadqq.com/s/images/snapshot1.png)
+- <https://github.com/notepadqq/notepadqq>
 
-Please visit our [Wiki](https://github.com/notepadqq/notepadqq/wiki) for more screenshots and details.
+Original license:
 
-Build it yourself
------
+- GPL-3.0
 
-| Build dependencies    | Dependencies      |
-|-----------------------|-------------------|
-| Qt 5.6 or higher      | Qt 5.6 or higher  |
-| qtwebengine5-dev      | qtwebengine5      |
-| libqt5websockets5-dev | libqt5websockets5 |
-| libqt5svg5-dev        | libqt5svg5        |
-| qttools5-dev-tools    | coreutils         |
-| libuchardet-dev       | libuchardet       |
-| pkg-config            |                   |
+Copyright notices from the original project are preserved.
 
-#### Get the source
+Modifications in this fork are documented through Git history.
 
-    $ git clone --recursive https://github.com/notepadqq/notepadqq.git
-    $ cd notepadqq
+---
 
-#### Build
+## Build from source
 
-    notepadqq$ ./configure --prefix /usr
-    notepadqq$ make
+This fork currently does **not** provide release packages.
 
-If you encounter errors make sure to have the necessary libraries installed. For Ubuntu you can do that using apt-get:
+Please build from source for testing.
 
-    sudo apt-get install qttools5-dev-tools qtwebengine5-dev libqt5websockets5-dev libqt5svg5 libqt5svg5-dev libuchardet-dev pkg-config
+### Get the source
 
-For CentOS:
+```bash
+git clone --recursive https://github.com/moon200702/fork_notepadqq_ubuntu2404.git
+cd fork_notepadqq_ubuntu2404
+````
 
-    sudo yum install -y qt5-qtbase-devel qt5-qttools-devel qt5-qtwebengine-devel qt5-qtwebsockets-devel qt5-qtsvg-devel uchardet qt5-qtwebchannel-devel pkgconfig
+If submodules were not fetched correctly:
 
-#### Install
+```bash
+git submodule update --init --recursive
+```
 
-You can run notepadqq from its build output folder. If however you want to install it, first build it
-by following the above steps, then run:
+### Ubuntu 24.04 build dependencies
 
-    notepadqq$ sudo make install
+Install the expected build dependencies:
 
-#### Qt
+```bash
+sudo apt update
+sudo apt install \
+  build-essential \
+  git \
+  pkg-config \
+  qtbase5-dev \
+  qttools5-dev \
+  qttools5-dev-tools \
+  qtwebengine5-dev \
+  libqt5websockets5-dev \
+  libqt5svg5-dev \
+  libuchardet-dev \
+  qml-module-qtquick-controls \
+  qml-module-qtquick-controls2 \
+  qml-module-qtwebengine \
+  qml-module-qtwebchannel \
+  qml-module-qtquick-dialogs \
+  qml-module-qt-labs-settings \
+  qml-module-qt-labs-folderlistmodel
+```
 
-If the newest version of Qt isn't available on your distribution, you can use the [online installer](http://www.qt.io/download-open-source) to get the latest libraries and install them into your home directory (`$HOME/Qt`). Notepadqq will automatically use them.
+### Check Qt version
 
-Distribution Packages
----------------------
+Before building, check the actual Qt version in your environment:
 
-#### Ubuntu, Debian, and others:
+```bash
+qmake -v
+pkg-config --modversion Qt5Core
+```
 
-    sudo apt install notepadqq
+This fork targets Qt 5.15.x testing.
 
-#### Snap
+If your environment uses a different Qt version, please record it when reporting issues.
 
-To install the latest stable version:
+### Build
 
-    sudo snap install notepadqq
+```bash
+./configure --prefix /usr
+make -j"$(nproc)"
+```
 
-You don't have the `snap` command? Follow the instructions at https://docs.snapcraft.io/core/install and then install Notepadqq as shown above.
+### Run without installing
 
-You can follow the unstable development releases from the "edge" channel.
+After building, prefer running from the build output first for testing.
 
-#### Arch Linux (community-maintained)
-Notepadqq is available from Arch's [community repositories](https://www.archlinux.org/packages/community/x86_64/notepadqq/). To install using pacman:
+Do not install system-wide until the build and runtime behavior are verified.
 
-    sudo pacman -S notepadqq
+### Optional install
 
-Alternatively it can be found in the AUR:
+```bash
+sudo make install
+```
 
- * Development (git version): [notepadqq-git](https://aur.archlinux.org/packages/notepadqq-git/)
+Use system-wide installation carefully. This fork is experimental.
 
-#### OpenSUSE (community-maintained)
-Notepadqq is avilable in OpenSUSE's main repository:
+---
 
-     sudo zypper in notepadqq
+## Distribution packages
 
-#### Solus (community-maintained)
-Notepadqq is available in the `shannon` (stable) repository:
+The following commands install upstream or distribution-packaged Notepadqq versions.
 
-     sudo eopkg it notepadqq
+They do **not** install this fork.
 
-#### Others
-Use a package for a compatible distribution, or build from [source](https://github.com/notepadqq/notepadqq.git).
-If you want to submit a package: https://github.com/notepadqq/notepadqq-packaging
+```bash
+sudo apt install notepadqq
+sudo snap install notepadqq
+```
 
-#### Compiling on macOS
-Instructions can be found [here](https://github.com/notepadqq/notepadqq/wiki/Compiling-Notepadqq-on-macOS).
+Use those only if you intentionally want the distribution/community package rather than this Ubuntu 24.04 compatibility fork.
+
+---
+
+## Smoke testing
+
+Before using this fork for important files, run basic smoke tests.
+
+Suggested test areas:
+
+* Open file
+* Edit file
+* Save file
+* Close and reopen
+* UTF-8 Chinese text
+* Emoji
+* LF line endings
+* CRLF line endings
+* Tabs and spaces
+* Trailing spaces
+* NBSP and other invisible Unicode whitespace
+* Search
+* Replace
+* Regex search and replace, if enabled
+* Multi-tab switching
+* Read-only file behavior
+* External file modification detection
+* Medium-size log files
+* Long single-line files
+
+A safe editor should not silently change file content, line endings, encoding, or invisible characters without user intent.
+
+---
+
+## Data-correctness checklist
+
+When testing this fork, pay special attention to the following cases.
+
+### Save and reopen
+
+1. Open a UTF-8 file.
+2. Edit a small line.
+3. Save.
+4. Close the file.
+5. Reopen it.
+6. Confirm the content is exactly what you expect.
+
+### External modification
+
+1. Open a file in Notepadqq.
+2. Modify the same file externally from a terminal.
+3. Return to Notepadqq.
+4. Try to save.
+
+Expected behavior:
+
+* The editor should warn before overwriting external changes.
+
+Risky behavior:
+
+* The editor silently overwrites the external change.
+
+### Read-only file
+
+1. Mark a file as read-only.
+2. Open it in Notepadqq.
+3. Modify it.
+4. Try to save.
+
+Expected behavior:
+
+* The editor clearly reports save failure.
+
+Risky behavior:
+
+* The UI behaves as if save succeeded even though the file was not written.
+
+### Line endings
+
+Test both LF and CRLF files.
+
+Expected behavior:
+
+* Line endings should not be changed silently.
+
+### Unicode whitespace
+
+Test files containing:
+
+* Normal spaces
+* Tabs
+* Trailing spaces
+* NBSP
+* Zero-width spaces
+
+Expected behavior:
+
+* Content should not be normalized or converted silently.
+
+---
+
+## Known risk areas
+
+The following areas need careful testing:
+
+* Startup crash on newer OS / Qt versions
+* QtWebEngine behavior
+* Search and replace correctness
+* Regex search and replace correctness
+* Unicode whitespace preservation
+* External file modification detection
+* Read-only file save behavior
+* Large file performance
+* Session restore
+* Clipboard behavior
+* Wayland / X11 differences
+* Packaging behavior
+
+Please avoid relying on this fork for critical work until these areas are validated.
+
+---
+
+## Issue reporting
+
+When reporting a bug, please include:
+
+* OS version
+* Desktop environment
+* X11 or Wayland
+* Qt version from `qmake -v`
+* Qt version from `pkg-config --modversion Qt5Core`
+* Compiler version
+* Build command
+* Whether submodules were initialized
+* Steps to reproduce
+* Expected behavior
+* Actual behavior
+* Example file if possible
+
+For data-correctness issues, please also mention:
+
+* File encoding
+* Line ending format
+* File size
+* Whether the file is a symlink
+* Whether the file is read-only
+* Whether the file was modified externally
+* Whether the issue happens after search/replace
+
+---
+
+## Contributing
+
+Contributions are welcome, but this fork intentionally prioritizes conservative changes.
+
+Please follow these principles:
+
+1. Keep changes small and reviewable.
+2. Preserve original license notices.
+3. Do not remove attribution to the upstream project.
+4. Do not rewrite large parts of the editor without discussion.
+5. Do not change default shortcuts unless fixing a confirmed bug.
+6. Do not remove features just to make the project compile.
+7. Prefer compatibility fixes over redesigns.
+8. Document behavior changes.
+9. Include test steps when fixing runtime or data-correctness issues.
+10. Treat AI-generated code as code that still requires human review.
+
+Suggested commit style:
+
+```text
+docs: add Ubuntu 24.04 build notes
+ci: add Ubuntu 24.04 Qt5 build workflow
+build: fix Qt 5.15 include compatibility
+runtime: fix startup crash on Qt 5.15
+tests: add smoke test checklist
+docs: document known Ubuntu 24.04 issues
+```
+
+---
+
+## Security and data-loss reports
+
+This fork is experimental.
+
+If you find a vulnerability, crash, save failure, or data-loss issue, please open an issue with reproducible steps.
+
+For data-loss reports, please provide a minimal example file whenever possible.
+
+Important issue labels may include:
+
+* `crash`
+* `data-correctness`
+* `save`
+* `search-replace`
+* `unicode`
+* `ubuntu-24.04`
+* `qt-5.15`
+
+---
+
+## Changelog
+
+### Unreleased
+
+Added:
+
+* Ubuntu 24.04 compatibility focus
+* Qt 5.15.x testing focus
+* AI-assisted development notice
+* Data-correctness checklist
+* Smoke-test guidance
+
+Changed:
+
+* README now clearly marks this repository as an unofficial personal fork
+
+Known issues:
+
+* Runtime stability is still under testing
+* Data-correctness tests are not complete
+* This fork is not production-ready
+
+---
+
+## Upstream README note
+
+Parts of the original Notepadqq README may still exist in this repository for historical and attribution purposes.
+
+If any upstream installation instruction conflicts with this fork README, prefer the instructions in this fork README.
+
+In particular:
+
+* `apt install notepadqq` installs the distribution package, not this fork.
+* `snap install notepadqq` installs the Snap package, not this fork.
+* This fork currently expects source builds for testing.
+
+---
+
+## Acknowledgements
+
+Thanks to the original Notepadqq authors and contributors for creating and maintaining the original project.
+
+This fork exists because of their work.
+
+```
+```
