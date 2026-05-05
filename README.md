@@ -1,3 +1,27 @@
+# Notepadqq Ubuntu 24.04 Compatibility Fork
+
+> This repository is an unofficial fork of [notepadqq/notepadqq](https://github.com/notepadqq/notepadqq).
+>
+> The goal of this fork is to test and improve compatibility with Ubuntu 24.04 and Qt 5.15.x.
+>
+> This project is not affiliated with, endorsed by, or maintained by the original Notepadqq maintainers.
+
+## Fork status
+
+This fork is currently experimental.
+
+Current goals:
+
+- Build Notepadqq on Ubuntu 24.04
+- Test runtime behavior with Qt 5.15.x
+- Preserve Notepadqq / Notepad++-like user experience
+- Improve documentation for build and smoke testing
+- Investigate crash and data-correctness risks
+
+This fork should not yet be considered production-ready.
+Use it at your own risk, especially for important files or infrastructure configuration.
+
+
 # <img src="https://user-images.githubusercontent.com/4319621/36906314-e3f99680-1e35-11e8-90fd-f959c9641f36.png" alt="Notepadqq" width="32" height="32" /> Notepadqq [![Build Status](https://travis-ci.com/notepadqq/notepadqq.svg?branch=master)](https://travis-ci.com/notepadqq/notepadqq) [![notepadqq](https://snapcraft.io/notepadqq/badge.svg)](https://snapcraft.io/notepadqq)
 
 > [!WARNING]  
