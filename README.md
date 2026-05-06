@@ -178,3 +178,5 @@ Please build from source for testing.
 ```bash
 git clone --recursive https://github.com/moon200702/fork_notepadqq_ubuntu2404.git
 cd fork_notepadqq_ubuntu2404
+chmod +x compile_script.sh
+./compile_script.sh
